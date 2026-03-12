@@ -16,13 +16,72 @@
         </div>
         <div class="nav">
             <span class="user">Olá, Eng. Gabriel</span>
-            <button class="icon-btn" id="notifications-btn">
+            <button class="icon-btn" id="notifications-btn" title="Notificações">
                 🔔
                 <span class="badge-alert">3</span>
             </button>
-            <button class="avatar" id="profile-btn">G</button>
+            <button class="avatar" id="profile-btn" title="Meu Perfil">G</button>
         </div>
     </header>
+
+    <!-- Notifications Dropdown -->
+    <div class="dropdown hidden" id="notifications-dropdown">
+        <div class="dropdown-header">
+            <h3>🔔 Notificações</h3>
+            <span class="badge-new">3 novas</span>
+        </div>
+        <div class="dropdown-content" id="notifications-list">
+            <!-- Notifications will be populated via JS -->
+        </div>
+        <div class="dropdown-footer">
+            <button class="btn-link" id="mark-all-read">Marcar todas como lidas</button>
+        </div>
+    </div>
+
+    <!-- Profile Dropdown -->
+    <div class="dropdown hidden" id="profile-dropdown">
+        <div class="profile-header">
+            <div class="profile-avatar-large">G</div>
+            <div class="profile-info">
+                <h3>Gabriel Silva</h3>
+                <p>Engenheiro Eletricista Sênior</p>
+            </div>
+        </div>
+        <div class="profile-details">
+            <div class="detail-item">
+                <span class="detail-icon">📧</span>
+                <div>
+                    <strong>Email</strong>
+                    <p>gabriel.silva@autou.io</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">🏢</span>
+                <div>
+                    <strong>Departamento</strong>
+                    <p>Engenharia de Manutenção</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">👥</span>
+                <div>
+                    <strong>Equipe</strong>
+                    <p>Operações Norte-Sul</p>
+                </div>
+            </div>
+            <div class="detail-item">
+                <span class="detail-icon">📊</span>
+                <div>
+                    <strong>Documentos Analisados</strong>
+                    <p>127 este mês</p>
+                </div>
+            </div>
+        </div>
+        <div class="dropdown-footer">
+            <button class="btn-link" id="edit-profile">Editar Perfil</button>
+            <button class="btn-link danger" id="logout">Sair</button>
+        </div>
+    </div>
 
     <!-- Main Container -->
     <main class="container">

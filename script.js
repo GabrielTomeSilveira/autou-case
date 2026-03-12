@@ -1,3 +1,63 @@
+// ===== USER DATA =====
+const currentUser = {
+    name: "Gabriel Silva",
+    role: "Engenheiro Eletricista Sênior",
+    email: "gabriel.silva@autou.io",
+    department: "Engenharia de Manutenção",
+    team: "Operações Norte-Sul",
+    docsAnalyzed: 127,
+    avatar: "G"
+};
+
+// ===== NOTIFICATIONS DATA =====
+const notifications = [
+    {
+        id: 1,
+        type: "task",
+        icon: "📋",
+        title: "Nova tarefa atribuída",
+        text: "Inspeção termográfica - SE 230kV Norte",
+        time: "Há 2 horas",
+        unread: true
+    },
+    {
+        id: 2,
+        type: "risk",
+        icon: "⚠️",
+        title: "Risco crítico detectado",
+        text: "Isolador fase B - Degradação 40% no projeto Norte-Sul",
+        time: "Há 4 horas",
+        unread: true
+    },
+    {
+        id: 3,
+        type: "deadline",
+        icon: "📅",
+        title: "Prazo se aproximando",
+        text: "Laudo TR-3 vence em 3 dias (15/03/2026)",
+        time: "Há 1 dia",
+        unread: true
+    },
+    {
+        id: 4,
+        type: "success",
+        icon: "✅",
+        title: "Documento analisado",
+        text: "ART Subestação Beta foi aprovada",
+        time: "Há 2 dias",
+        unread: false
+    },
+    {
+        id: 5,
+        type: "comment",
+        icon: "💬",
+        title: "Comentário adicionado",
+        text: "Eng. Costa comentou em Proposta XYZ Energia",
+        time: "Há 3 dias",
+        unread: false
+    }
+];
+
 // ===== DOCUMENT DATA =====
 const documents = [
     {
@@ -161,7 +221,119 @@ const showScreen = (screenId) => {
     screens.forEach(s => s.classList.remove('active'));
     document.getElementById(screenId).classList.add('active');
     window.scrollTo(0, 0);
+    // Close all dropdowns when changing screens
+    closeAllDropdowns();
 };
+
+// ===== DROPDOWNS =====
+const notificationsBtn = document.getElementById('notifications-btn');
+const profileBtn = document.getElementById('profile-btn');
+const notificationsDropdown = document.getElementById('notifications-dropdown');
+const profileDropdown = document.getElementById('profile-dropdown');
+
+const toggleDropdown = (dropdown) => {
+    const isHidden = dropdown.classList.contains('hidden');
+    closeAllDropdowns();
+    if (isHidden) {
+        dropdown.classList.remove('hidden');
+    }
+};
+
+const closeAllDropdowns = () => {
+    notificationsDropdown.classList.add('hidden');
+    profileDropdown.classList.add('hidden');
+};
+
+// Notifications button
+notificationsBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleDropdown(notificationsDropdown);
+    renderNotifications();
+});
+
+// Profile button
+profileBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleDropdown(profileDropdown);
+});
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', () => {
+    closeAllDropdowns();
+});
+
+// Prevent closing when clicking inside dropdowns
+notificationsDropdown.addEventListener('click', (e) => e.stopPropagation());
+profileDropdown.addEventListener('click', (e) => e.stopPropagation());
+
+// Render notifications
+const renderNotifications = () => {
+    const list = document.getElementById('notifications-list');
+    list.innerHTML = notifications.map(notif => `
+        <div class="notification-item ${notif.unread ? 'unread' : ''}" data-id="${notif.id}">
+            <div class="notification-icon">${notif.icon}</div>
+            <div class="notification-text">
+                <strong>${notif.title}</strong>
+                <p>${notif.text}</p>
+                <div class="notification-time">${notif.time}</div>
+            </div>
+        </div>
+    `).join('');
+
+    // Add click handlers to notifications
+    list.querySelectorAll('.notification-item').forEach(item => {
+        item.addEventListener('click', () => {
+            const id = parseInt(item.dataset.id);
+            markNotificationAsRead(id);
+        });
+    });
+};
+
+const markNotificationAsRead = (id) => {
+    const index = notifications.findIndex(n => n.id === id);
+    if (index !== -1 && notifications[index].unread) {
+        notifications[index].unread = false;
+        updateNotificationBadge();
+        renderNotifications();
+    }
+};
+
+const updateNotificationBadge = () => {
+    const unreadCount = notifications.filter(n => n.unread).length;
+    const badge = document.querySelector('.badge-alert');
+    if (unreadCount > 0) {
+        badge.textContent = unreadCount;
+        badge.style.display = 'block';
+    } else {
+        badge.style.display = 'none';
+    }
+};
+
+// Mark all as read
+document.getElementById('mark-all-read').addEventListener('click', () => {
+    notifications.forEach(n => n.unread = false);
+    updateNotificationBadge();
+    renderNotifications();
+    showToast('✅ Todas notificações marcadas como lidas');
+});
+
+// Edit profile
+document.getElementById('edit-profile').addEventListener('click', () => {
+    showToast('🔧 Funcionalidade em desenvolvimento');
+    closeAllDropdowns();
+});
+
+// Logout
+document.getElementById('logout').addEventListener('click', () => {
+    if (confirm('Deseja realmente sair do sistema?')) {
+        showToast('👋 Até logo, Eng. Gabriel!');
+        setTimeout(() => {
+            // In a real app, this would redirect to login
+            location.reload();
+        }, 1500);
+    }
+    closeAllDropdowns();
+});
 
 // ===== RENDER DOCUMENTS =====
 const renderDocuments = (docs = documents) => {
@@ -513,6 +685,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupDocumentActions();
     setupActionForm();
     setupMetricModals();
+    updateNotificationBadge();
 
     // Navigation - Logo
     document.getElementById('logo-link').addEventListener('click', (e) => {
@@ -520,7 +693,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showScreen('dashboard');
     });
 
-    // Navigation - FAB Button (FIXED!)
+    // Navigation - FAB Button
     document.getElementById('fab-upload').addEventListener('click', () => {
         showScreen('upload');
     });
@@ -562,6 +735,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (e.key === 'Escape') {
             document.getElementById('zoom-modal').classList.add('hidden');
             document.getElementById('metric-modal').classList.add('hidden');
+            closeAllDropdowns();
         }
     });
 });
