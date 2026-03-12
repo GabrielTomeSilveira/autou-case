@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AutoU Docs | IA para Análise de Documentos</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="header">
+    <div class="logo">AutoU <span class="badge">Docs</span></div>
+    <nav class="nav">
+      <span class="user">Olá, Eng. Gabriel</span>
+      <button class="icon-btn">🔔 <span class="badge-alert">3</span></button>
+      <button class="avatar">G</button>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="container">
+    
+    <!-- SCREEN 1: DASHBOARD -->
+    <section id="dashboard" class="screen active">
+      <div class="welcome">
+        <h1>Visão Geral</h1>
+        <p class="subtitle">Acompanhe seus documentos e análises em tempo real</p>
+      </div>
+
+      <!-- Metrics -->
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <span class="metric-value">15</span>
+          <span class="metric-label">Docs pendentes</span>
+        </div>
+        <div class="metric-card warning">
+          <span class="metric-value">3</span>
+          <span class="metric-label">Riscos detectados</span>
+        </div>
+        <div class="metric-card success">
+          <span class="metric-value">4.2h</span>
+          <span class="metric-label">Tempo economizado/doc</span>
+        </div>
+      </div>
+
+      <!-- Filters -->
+      <div class="filters">
+        <input type="text" placeholder="Buscar por projeto, equipamento..." class="search-input" />
+        <select class="filter-select">
+          <option>Todos os tipos</option>
+          <option>Relatórios</option>
+          <option>Laudos</option>
+          <option>Propostas</option>
+          <option>ARTs</option>
+        </select>
+        <select class="filter-select">
+          <option>Mais recentes</option>
+          <option>Mais críticos</option>
+          <option>Por projeto</option>
+        </select>
+      </div>
+
+      <!-- Document List -->
+      <div class="doc-list">
+        <!-- Card 1 -->
+        <div class="doc-card" data-target="insights">
+          <div class="doc-icon">📄</div>
+          <div class="doc-info">
+            <h4>Relatório de Inspeção Termográfica - SE 230kV Norte</h4>
+            <p class="meta">Projeto: Norte-Sul • 10 Mar 2026 • Eng. Silva</p>
+            <div class="tags">
+              <span class="tag tag-red">⚠️ Risco</span>
+              <span class="tag tag-gray">Termografia</span>
+            </div>
+          </div>
+          <button class="btn-secondary">Analisar</button>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="doc-card" data-target="insights">
+          <div class="doc-icon">🔬</div>
+          <div class="doc-info">
+            <h4>Laudos de Ensaios Elétricos - Transformador TR-3</h4>
+            <p class="meta">Projeto: Subestação Alpha • 08 Mar 2026 • Eng. Costa</p>
+            <div class="tags">
+              <span class="tag tag-green">✅ Conforme</span>
+              <span class="tag tag-gray">Ensaios</span>
+            </div>
+          </div>
+          <button class="btn-secondary">Analisar</button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="doc-card" data-target="insights">
+          <div class="doc-icon">📋</div>
+          <div class="doc-info">
+            <h4>Proposta Técnica - Adequação NR-10</h4>
+            <p class="meta">Fornecedor: XYZ Energia • 05 Mar 2026</p>
+            <div class="tags">
+              <span class="tag tag-blue">💡 Oportunidade</span>
+              <span class="tag tag-gray">Comercial</span>
+            </div>
+          </div>
+          <button class="btn-secondary">Analisar</button>
+        </div>
+      </div>
+
+      <!-- FAB -->
+      <button class="fab" id="open-upload">+ Upload</button>
+    </section>
+
+    <!-- SCREEN 2: UPLOAD -->
+    <section id="upload" class="screen">
+      <div class="upload-container">
+        <h2>Upload de Documentos</h2>
+        <p class="subtitle">Arraste e solte seus arquivos ou clique para navegar</p>
+        
+        <div class="dropzone" id="dropzone">
+          <div class="dropzone-icon">📁</div>
+          <p><strong>Clique ou arraste arquivos aqui</strong></p>
+          <p class="small">PDF, DOCX, PNG, JPG • Máx. 50MB cada</p>
+        </div>
+
+        <div id="upload-progress" class="hidden">
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill"></div>
+          </div>
+          <p id="progress-text">Processando: 0%</p>
+        </div>
+
+        <div id="upload-results" class="hidden">
+          <h3>Documentos processados:</h3>
+          <div class="result-item">
+            <span>✅ Relatório_Inspeção_SE230kV.pdf</span>
+            <span class="tag tag-green">Classificado</span>
+          </div>
+          <div class="result-item">
+            <span>✅ Laudos_TR3_2026.docx</span>
+            <span class="tag tag-green">Classificado</span>
+          </div>
+          <button class="btn-primary" id="proceed-analysis">Prosseguir para Análise</button>
+        </div>
+
+        <button class="btn-secondary" id="back-dashboard">← Voltar</button>
+      </div>
+    </section>
+
+    <!-- SCREEN 3: INSIGHTS -->
+    <section id="insights" class="screen">
+      <div class="insights-layout">
+        <!-- Left: Document Preview -->
+        <div class="doc-preview">
+          <div class="preview-header">
+            <h3>Relatório de Inspeção Termográfica - SE 230kV Norte</h3>
+            <div class="preview-controls">
+              <button class="btn-sm">🔍 Zoom</button>
+              <button class="btn-sm">📥 Baixar</button>
+            </div>
+          </div>
+          <div class="preview-content">
+            <p><strong>1. Objetivo</strong></p>
+            <p>Inspeção termográfica preventiva nos equipamentos da SE 230kV Norte...</p>
+            
+            <p class="highlight-red"><strong>⚠️ ATENÇÃO:</strong> Isolador da fase B apresenta temperatura de 87°C, ultrapassando o limite operacional de 80°C conforme NBR 61501.</p>
+            
+            <p><strong>2. Metodologia</strong></p>
+            <p>Utilizado equipamento FLIR T860 com resolução de 640x480 pixels...</p>
+            
+            <p class="highlight-green"><strong>✅ CONFORME:</strong> Todos os ensaios dielétricos realizados dentro dos parâmetros da NBR 61501.</p>
+            
+            <p><strong>3. Resultados</strong></p>
+            <p>Foram identificados 3 pontos críticos de aquecimento...</p>
+            
+            <p class="highlight-blue"><strong>📋 AÇÃO NECESSÁRIA:</strong> Substituir isolador da fase B até 30/04/2026 para evitar risco de flashover.</p>
+          </div>
+        </div>
+
+        <!-- Right: AI Sidebar -->
+        <aside class="ai-sidebar">
+          <div class="sidebar-section">
+            <h4>🤖 Resumo Executivo</h4>
+            <ul class="summary-list">
+              <li>Inspeção identificou 3 pontos críticos de aquecimento</li>
+              <li>Isoladores da fase B com degradação avançada</li>
+              <li>Demais equipamentos operam dentro dos parâmetros</li>
+            </ul>
+          </div>
+
+          <div class="sidebar-section">
+            <h4>📊 Dados Extraídos</h4>
+            <div class="data-cards">
+              <div class="data-card">
+                <span class="data-icon">📍</span>
+                <div>
+                  <strong>Localização</strong>
+                  <p>SE 230kV Norte, Bay TR-3</p>
+                </div>
+              </div>
+              <div class="data-card">
+                <span class="data-icon">🌡️</span>
+                <div>
+                  <strong>Temp. Máxima</strong>
+                  <p>87°C (fase B)</p>
+                </div>
+              </div>
+              <div class="data-card">
+                <span class="data-icon">⚡</span>
+                <div>
+                  <strong>Tensão</strong>
+                  <p>245 kV (alerta)</p>
+                </div>
+              </div>
+              <div class="data-card">
+                <span class="data-icon">📅</span>
+                <div>
+                  <strong>Próxima Ação</strong>
+                  <p>30/04/2026</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-section">
+            <h4>🏷️ Classificação IA</h4>
+            <div class="risk-list">
+              <div class="risk-item risk-high">
+                <span>⚠️</span>
+                <p>Isolador fase B: degradação 40% - risco de flashover</p>
+              </div>
+              <div class="risk-item risk-medium">
+                <span>🟡</span>
+                <p>Temperatura 15% acima do histórico - investigar</p>
+              </div>
+              <div class="risk-item risk-low">
+                <span>✅</span>
+                <p>Certificações de segurança válidas</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="sidebar-actions">
+            <button class="btn-primary" id="create-action">Criar Plano de Ação</button>
+            <button class="btn-secondary" id="forward-team">Encaminhar</button>
+            <button class="btn-tertiary" id="mark-reviewed">Marcar como Analisado</button>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: ACTION -->
+    <section id="action" class="screen">
+      <div class="action-container">
+        <h2>Criar Plano de Ação</h2>
+        <p class="subtitle">Preencha os detalhes para gerar a ordem de serviço</p>
+
+        <form id="action-form" class="action-form">
+          <div class="form-group">
+            <label>Problema Identificado</label>
+            <textarea readonly>Isolador da fase B com temperatura de 87°C - risco de flashover</textarea>
+          </div>
+
+          <div class="form-group">
+            <label>Ação Recomendada (IA)</label>
+            <textarea readonly>Substituir isolador da fase B do transformador TR-3 antes de 30/04/2026</textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label>Prioridade</label>
+              <select id="priority">
+                <option value="high">🔴 Alta</option>
+                <option value="medium" selected>🟡 Média</option>
+                <option value="low">🟢 Baixa</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Atribuir para</label>
+              <select id="assignee">
+                <option>Eng. Silva (Manutenção)</option>
+                <option selected>Eng. Costa (Operações)</option>
+                <option>Equipe Externa XYZ</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Prazo</label>
+            <input type="date" id="due-date" value="2026-04-30" />
+          </div>
+
+          <div class="form-group">
+            <label>Observações</label>
+            <textarea placeholder="Adicione detalhes adicionais..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-primary">✅ Gerar e Enviar</button>
+            <button type="button" class="btn-secondary" id="cancel-action">Cancelar</button>
+          </div>
+        </form>
+
+        <!-- Success State (hidden by default) -->
+        <div id="success-state" class="hidden">
+          <div class="success-icon">✅</div>
+          <h3>Plano de ação criado com sucesso!</h3>
+          <p>Ordem de serviço #OS-2026-0342 enviada para Eng. Costa</p>
+          <p class="small">Prazo: 30/04/2026 • Prioridade: Média</p>
+          <button class="btn-primary" id="back-dashboard-success">Voltar ao Dashboard</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Toast Notification -->
+  <div id="toast" class="toast hidden">
+    <span id="toast-message">Mensagem aqui</span>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
