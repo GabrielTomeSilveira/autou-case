@@ -110,6 +110,43 @@ const documents = [
     }
 ];
 
+// Pending documents data
+const pendingDocs = [
+    { id: 1, title: "Laudo TR-3", assignee: "Eng. Costa", deadline: "15/03/2026", priority: "high" },
+    { id: 2, title: "ART Sub Beta", assignee: "Eng. Oliveira", deadline: "20/03/2026", priority: "medium" },
+    { id: 3, title: "Relatório DJ-2", assignee: "Eng. Santos", deadline: "18/03/2026", priority: "high" },
+    { id: 4, title: "Proposta XYZ", assignee: "Comercial", deadline: "25/03/2026", priority: "low" },
+    { id: 5, title: "Inspeção SE Norte", assignee: "Eng. Silva", deadline: "12/03/2026", priority: "high" }
+];
+
+// Risks data
+const risks = [
+    { 
+        id: 1, 
+        title: "Isolador fase B - Degradação 40%", 
+        project: "SE 230kV Norte", 
+        severity: "high",
+        description: "Risco de flashover - temperatura 87°C",
+        deadline: "30/04/2026"
+    },
+    { 
+        id: 2, 
+        title: "Disjuntor DJ-2 - Desgaste 60%", 
+        project: "Linha Transmissão 138kV", 
+        severity: "high",
+        description: "Desgaste avançado nos contatos principais",
+        deadline: "25/03/2026"
+    },
+    { 
+        id: 3, 
+        title: "Temperatura acima do histórico", 
+        project: "SE 230kV Norte", 
+        severity: "medium",
+        description: "15% acima da média - necessita investigação",
+        deadline: "15/03/2026"
+    }
+];
+
 // ===== NAVIGATION =====
 const screens = document.querySelectorAll('.screen');
 
@@ -235,6 +272,111 @@ const loadDocument = (id) => {
     document.getElementById('preview-title').textContent = doc.title;
     document.getElementById('preview-content').innerHTML = doc.content;
     document.getElementById('zoom-content').innerHTML = doc.content;
+};
+
+// ===== METRIC MODALS =====
+const setupMetricModals = () => {
+    const modal = document.getElementById('metric-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeModal = document.getElementById('close-modal');
+
+    const openModal = (title, content) => {
+        modalTitle.textContent = title;
+        modalBody.innerHTML = content;
+        modal.classList.remove('hidden');
+    };
+
+    const close = () => {
+        modal.classList.add('hidden');
+    };
+
+    // Click on metric cards
+    document.getElementById('metric-pending').addEventListener('click', () => {
+        const html = `
+            <div class="metric-detail-list">
+                <p style="margin-bottom: 16px; color: var(--text-secondary);">
+                    <strong>15 documentos</strong> aguardando análise e atribuição
+                </p>
+                ${pendingDocs.map(doc => `
+                    <div class="metric-detail-item pending">
+                        <h4>${doc.title}</h4>
+                        <p>👤 Atribuído para: <strong>${doc.assignee}</strong></p>
+                        <p>📅 Prazo: <strong>${doc.deadline}</strong></p>
+                        <p>⚡ Prioridade: <strong>${doc.priority === 'high' ? '🔴 Alta' : doc.priority === 'medium' ? '🟡 Média' : '🟢 Baixa'}</strong></p>
+                    </div>
+                `).join('')}
+                <p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary);">
+                    Mostrando 5 de 15 documentos pendentes
+                </p>
+            </div>
+        `;
+        openModal('📄 Documentos Pendentes', html);
+    });
+
+    document.getElementById('metric-risks').addEventListener('click', () => {
+        const html = `
+            <div class="metric-detail-list">
+                <p style="margin-bottom: 16px; color: var(--text-secondary);">
+                    <strong>3 riscos críticos</strong> identificados pela IA
+                </p>
+                ${risks.map(risk => `
+                    <div class="metric-detail-item risk">
+                        <h4>${risk.title}</h4>
+                        <p>📍 Projeto: <strong>${risk.project}</strong></p>
+                        <p>📝 ${risk.description}</p>
+                        <p>📅 Ação necessária até: <strong>${risk.deadline}</strong></p>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+        openModal('⚠️ Riscos Detectados', html);
+    });
+
+    document.getElementById('metric-time').addEventListener('click', () => {
+        const html = `
+            <div style="margin-bottom: 20px;">
+                <p style="margin-bottom: 16px; color: var(--text-secondary);">
+                    Comparativo de tempo médio por documento analisado
+                </p>
+                <div class="comparison-grid">
+                    <div class="comparison-card before">
+                        <h4>Análise Manual</h4>
+                        <div class="value">5.0h</div>
+                        <p>Tempo médio anterior</p>
+                    </div>
+                    <div class="comparison-card after">
+                        <h4>Com AutoU IA</h4>
+                        <div class="value">0.8h</div>
+                        <p>Tempo médio atual</p>
+                        <div class="savings">💾 Economia de 84%</div>
+                    </div>
+                </div>
+            </div>
+            <div style="background: #F0FDF4; padding: 16px; border-radius: 8px; border-left: 4px solid var(--accent);">
+                <h4 style="margin-bottom: 8px; color: var(--text);">💡 Impacto Mensal</h4>
+                <p style="font-size: 14px; color: var(--text-secondary);">
+                    Considerando 50 documentos/mês:<br>
+                    <strong>Antes:</strong> 250 horas (31 dias úteis × 8h = ~4 meses)<br>
+                    <strong>Agora:</strong> 40 horas (1 semana)<br>
+                    <strong style="color: var(--accent);">Economia: 210 horas/mês (4.2h/doc × 50 docs)</strong>
+                </p>
+            </div>
+        `;
+        openModal('⏱️ Tempo Economizado', html);
+    });
+
+    closeModal.addEventListener('click', close);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) close();
+    });
+
+    // ESC key to close
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            close();
+        }
+    });
 };
 
 // ===== UPLOAD SIMULATION =====
@@ -370,36 +512,56 @@ document.addEventListener('DOMContentLoaded', () => {
     setupUpload();
     setupDocumentActions();
     setupActionForm();
+    setupMetricModals();
 
-    // Navigation
+    // Navigation - Logo
     document.getElementById('logo-link').addEventListener('click', (e) => {
         e.preventDefault();
         showScreen('dashboard');
     });
 
-    document.getElementById('open-upload').addEventListener('click', () => showScreen('upload'));
-    document.getElementById('back-dashboard').addEventListener('click', () => showScreen('dashboard'));
-    document.getElementById('fab-upload').addEventListener('click', () => showScreen('upload'));
+    // Navigation - FAB Button (FIXED!)
+    document.getElementById('fab-upload').addEventListener('click', () => {
+        showScreen('upload');
+    });
+
+    // Navigation - Upload screen
+    document.getElementById('back-dashboard-upload').addEventListener('click', () => {
+        showScreen('dashboard');
+    });
     
-    document.getElementById('proceed-analysis').addEventListener('click', () => showScreen('insights'));
+    document.getElementById('proceed-analysis').addEventListener('click', () => {
+        showScreen('insights');
+    });
     
-    document.getElementById('create-action').addEventListener('click', () => showScreen('action'));
-    document.getElementById('forward-team').addEventListener('click', () => showToast('📤 Encaminhado para a equipe'));
+    // Navigation - Insights screen
+    document.getElementById('create-action').addEventListener('click', () => {
+        showScreen('action');
+    });
+    
+    document.getElementById('forward-team').addEventListener('click', () => {
+        showToast('📤 Encaminhado para a equipe');
+    });
+    
     document.getElementById('mark-reviewed').addEventListener('click', () => {
         showToast('✅ Marcado como analisado');
         setTimeout(() => showScreen('dashboard'), 1000);
     });
     
-    document.getElementById('cancel-action').addEventListener('click', () => showScreen('insights'));
-    document.getElementById('back-dashboard-success').addEventListener('click', () => showScreen('dashboard'));
+    // Navigation - Action screen
+    document.getElementById('cancel-action').addEventListener('click', () => {
+        showScreen('insights');
+    });
+    
+    document.getElementById('back-dashboard-success').addEventListener('click', () => {
+        showScreen('dashboard');
+    });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             document.getElementById('zoom-modal').classList.add('hidden');
-            if (!document.getElementById('zoom-modal').classList.contains('hidden') === false) {
-                showScreen('dashboard');
-            }
+            document.getElementById('metric-modal').classList.add('hidden');
         }
     });
 });

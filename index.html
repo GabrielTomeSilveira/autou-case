@@ -35,17 +35,20 @@
 
             <!-- Metrics -->
             <div class="metrics-grid">
-                <div class="metric-card warning">
+                <div class="metric-card warning clickable" id="metric-pending" data-metric="pending">
                     <span class="metric-value">15</span>
                     <span class="metric-label">Docs pendentes</span>
+                    <span class="metric-hint">Clique para ver detalhes →</span>
                 </div>
-                <div class="metric-card warning">
+                <div class="metric-card danger clickable" id="metric-risks" data-metric="risks">
                     <span class="metric-value">3</span>
                     <span class="metric-label">Riscos detectados</span>
+                    <span class="metric-hint">Clique para ver detalhes →</span>
                 </div>
-                <div class="metric-card success">
+                <div class="metric-card success clickable" id="metric-time" data-metric="time">
                     <span class="metric-value">4.2h</span>
                     <span class="metric-label">Tempo economizado/doc</span>
+                    <span class="metric-hint">Clique para ver comparação →</span>
                 </div>
             </div>
 
@@ -75,7 +78,7 @@
         <!-- UPLOAD SCREEN -->
         <section id="upload" class="screen">
             <div class="upload-container">
-                <button class="btn-tertiary" id="back-dashboard">← Voltar ao Dashboard</button>
+                <button class="btn-tertiary" id="back-dashboard-upload">← Voltar ao Dashboard</button>
                 <h2>Upload de Documentos</h2>
                 <p class="subtitle">Arraste e solte seus arquivos ou clique para navegar</p>
                 
@@ -270,9 +273,22 @@
         <span id="toast-message">Mensagem aqui</span>
     </div>
 
+    <!-- Metric Detail Modal -->
+    <div class="modal hidden" id="metric-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modal-title">Detalhes</h3>
+                <button class="close-modal" id="close-modal">✕</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Content will be populated via JS -->
+            </div>
+        </div>
+    </div>
+
     <!-- Zoom Modal -->
     <div class="modal hidden" id="zoom-modal">
-        <div class="modal-content">
+        <div class="modal-content modal-large">
             <div class="modal-header">
                 <h3>Visualização Ampliada</h3>
                 <button class="close-modal" id="close-zoom">✕</button>
