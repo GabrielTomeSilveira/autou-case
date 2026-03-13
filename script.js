@@ -70,26 +70,7 @@ const documents = [
         tags: ["Risco", "Termografia"],
         status: "warning",
         icon: "📄",
-        content: `
-            <h4>1. Objetivo</h4>
-            <p>Inspeção termográfica preventiva nos equipamentos da SE 230kV Norte...</p>
-            <div class="highlight-red">
-                <strong>⚠️ ATENÇÃO:</strong> Isolador da fase B apresenta temperatura de 87°C, 
-                ultrapassando o limite operacional de 80°C conforme NBR 61501.
-            </div>
-            <h4>2. Metodologia</h4>
-            <p>Utilizado equipamento FLIR T860 com resolução de 640×480 pixels...</p>
-            <div class="highlight-green">
-                <strong>✅ CONFORME:</strong> Todos os ensaios dielétricos realizados 
-                dentro dos parâmetros da NBR 61501.
-            </div>
-            <h4>3. Resultados</h4>
-            <p>Foram identificados 3 pontos críticos de aquecimento...</p>
-            <div class="highlight-blue">
-                <strong>📋 AÇÃO NECESSÁRIA:</strong> Substituir isolador da fase B 
-                até 30/04/2026 para evitar risco de flashover.
-            </div>
-        `
+        content: `<h4>1. Objetivo</h4><p>Inspeção termográfica preventiva nos equipamentos da SE 230kV Norte...</p><div class="highlight-red"><strong>⚠️ ATENÇÃO:</strong> Isolador da fase B apresenta temperatura de 87°C, ultrapassando o limite operacional de 80°C conforme NBR 61501.</div><h4>2. Metodologia</h4><p>Utilizado equipamento FLIR T860 com resolução de 640×480 pixels...</p><div class="highlight-green"><strong>✅ CONFORME:</strong> Todos os ensaios dielétricos realizados dentro dos parâmetros da NBR 61501.</div><h4>3. Resultados</h4><p>Foram identificados 3 pontos críticos de aquecimento...</p><div class="highlight-blue"><strong>📋 AÇÃO NECESSÁRIA:</strong> Substituir isolador da fase B até 30/04/2026 para evitar risco de flashover.</div>`
     },
     {
         id: 2,
@@ -101,16 +82,7 @@ const documents = [
         tags: ["Conforme", "Ensaios"],
         status: "success",
         icon: "🔬",
-        content: `
-            <h4>1. Escopo</h4>
-            <p>Ensaios elétricos completos no transformador TR-3 da Subestação Alpha...</p>
-            <div class="highlight-green">
-                <strong>✅ RESULTADO:</strong> Todos os parâmetros dentro das especificações 
-                do fabricante e normas ABNT.
-            </div>
-            <h4>2. Ensaios Realizados</h4>
-            <p>• Resistência de isolamento<br>• Fator de potência<br>• Relação de transformação</p>
-        `
+        content: `<h4>1. Escopo</h4><p>Ensaios elétricos completos no transformador TR-3 da Subestação Alpha...</p><div class="highlight-green"><strong>✅ RESULTADO:</strong> Todos os parâmetros dentro das especificações do fabricante e normas ABNT.</div><h4>2. Ensaios Realizados</h4><p>• Resistência de isolamento<br>• Fator de potência<br>• Relação de transformação</p>`
     },
     {
         id: 3,
@@ -122,14 +94,7 @@ const documents = [
         tags: ["Oportunidade", "Comercial"],
         status: "info",
         icon: "📋",
-        content: `
-            <h4>1. Objeto</h4>
-            <p>Proposta para adequação das instalações elétricas conforme NR-10...</p>
-            <div class="highlight-blue">
-                <strong>💡 OPORTUNIDADE:</strong> Projeto estimado em R$ 450.000,00 
-                com prazo de 90 dias.
-            </div>
-        `
+        content: `<h4>1. Objeto</h4><p>Proposta para adequação das instalações elétricas conforme NR-10...</p><div class="highlight-blue"><strong>💡 OPORTUNIDADE:</strong> Projeto estimado em R$ 450.000,00 com prazo de 90 dias.</div>`
     },
     {
         id: 4,
@@ -141,13 +106,7 @@ const documents = [
         tags: ["Conforme", "ART"],
         status: "success",
         icon: "📝",
-        content: `
-            <h4>Dados da ART</h4>
-            <p>Número: 2026/0001234<br>Responsável: Eng. Oliveira (CREA 123456)</p>
-            <div class="highlight-green">
-                <strong>✅ VÁLIDA:</strong> ART registrada e quitada.
-            </div>
-        `
+        content: `<h4>Dados da ART</h4><p>Número: 2026/0001234<br>Responsável: Eng. Oliveira (CREA 123456)</p><div class="highlight-green"><strong>✅ VÁLIDA:</strong> ART registrada e quitada.</div>`
     },
     {
         id: 5,
@@ -159,16 +118,108 @@ const documents = [
         tags: ["Risco", "Manutenção"],
         status: "warning",
         icon: "📄",
-        content: `
-            <h4>1. Resumo</h4>
-            <p>Manutenção preventiva nos disjuntores da linha 138kV...</p>
-            <div class="highlight-red">
-                <strong>⚠️ ATENÇÃO:</strong> Disjuntor DJ-2 apresenta desgaste de 60% 
-                nos contatos principais.
-            </div>
-        `
+        content: `<h4>1. Resumo</h4><p>Manutenção preventiva nos disjuntores da linha 138kV...</p><div class="highlight-red"><strong>⚠️ ATENÇÃO:</strong> Disjuntor DJ-2 apresenta desgaste de 60% nos contatos principais.</div>`
     }
 ];
+
+// ===== DADOS ESPECÍFICOS POR DOCUMENTO (DINÂMICO) =====
+const documentData = {
+    1: { // Relatório Termográfico
+        summary: [
+            "Inspeção identificou 3 pontos críticos de aquecimento",
+            "Isoladores da fase B com degradação avançada (40%)",
+            "Temperatura máxima: 87°C (acima do limite de 80°C)",
+            "Risco de flashover identificado - ação necessária até 30/04/2026"
+        ],
+        extractedData: [
+            { icon: "📍", label: "Localização", value: "SE 230kV Norte, Bay TR-3" },
+            { icon: "🌡️", label: "Temp. Máxima", value: "87°C (fase B)" },
+            { icon: "⚡", label: "Tensão", value: "245 kV" },
+            { icon: "📅", label: "Ação Necessária", value: "30/04/2026" }
+        ],
+        classification: [
+            { type: "risk", text: "Isolador fase B: degradação 40% - risco de flashover" },
+            { type: "warning", text: "Temperatura 15% acima do histórico - investigar" },
+            { type: "success", text: "Certificações de segurança válidas" }
+        ]
+    },
+    2: { // Laudos Ensaios
+        summary: [
+            "Todos os ensaios elétricos realizados com sucesso",
+            "Parâmetros dentro das especificações do fabricante",
+            "Conforme normas ABNT NBR 61501",
+            "Transformador TR-3 aprovado para operação"
+        ],
+        extractedData: [
+            { icon: "📍", label: "Localização", value: "Subestação Alpha" },
+            { icon: "🔬", label: "Ensaios", value: "5 testes realizados" },
+            { icon: "✅", label: "Status", value: "Aprovado" },
+            { icon: "📅", label: "Data", value: "08/03/2026" }
+        ],
+        classification: [
+            { type: "success", text: "Resistência de isolamento: conforme" },
+            { type: "success", text: "Fator de potência: dentro do limite" },
+            { type: "success", text: "Relação de transformação: nominal" }
+        ]
+    },
+    3: { // Proposta NR-10
+        summary: [
+            "Proposta para adequação conforme NR-10",
+            "Projeto estimado em R$ 450.000,00",
+            "Prazo de execução: 90 dias",
+            "Oportunidade comercial identificada"
+        ],
+        extractedData: [
+            { icon: "💰", label: "Valor", value: "R$ 450.000,00" },
+            { icon: "📅", label: "Prazo", value: "90 dias" },
+            { icon: "🏢", label: "Cliente", value: "XYZ Energia" },
+            { icon: "📋", label: "Tipo", value: "Adequação NR-10" }
+        ],
+        classification: [
+            { type: "success", text: "Projeto estimado em R$ 450.000,00 com prazo de 90 dias" },
+            { type: "success", text: "Escopo completo de adequação NR-10" },
+            { type: "success", text: "Proposta técnica detalhada" }
+        ]
+    },
+    4: { // ART
+        summary: [
+            "ART registrada e quitada",
+            "Responsável técnico: Eng. Oliveira",
+            "CREA 123456/SP",
+            "Documento válido e regular"
+        ],
+        extractedData: [
+            { icon: "📝", label: "Número ART", value: "2026/0001234" },
+            { icon: "👤", label: "Responsável", value: "Eng. Oliveira" },
+            { icon: "🔢", label: "CREA", value: "123456/SP" },
+            { icon: "✅", label: "Status", value: "Válida e quitada" }
+        ],
+        classification: [
+            { type: "success", text: "ART registrada e quitada" },
+            { type: "success", text: "Documentação completa" },
+            { type: "success", text: "Conforme exigências legais" }
+        ]
+    },
+    5: { // Relatório Disjuntores
+        summary: [
+            "Manutenção preventiva nos disjuntores 138kV",
+            "Disjuntor DJ-2 com desgaste de 60% nos contatos",
+            "Necessidade de substituição programada",
+            "Risco operacional identificado"
+        ],
+        extractedData: [
+            { icon: "📍", label: "Localização", value: "Linha Transmissão 138kV" },
+            { icon: "⚠️", label: "Desgaste", value: "60% (DJ-2)" },
+            { icon: "🔧", label: "Ação", value: "Substituição necessária" },
+            { icon: "📅", label: "Prazo", value: "25/03/2026" }
+        ],
+        classification: [
+            { type: "risk", text: "Disjuntor DJ-2: desgaste de 60% nos contatos principais" },
+            { type: "warning", text: "Substituição recomendada antes da falha" },
+            { type: "success", text: "Demais disjuntores operam normalmente" }
+        ]
+    }
+};
 
 // Pending documents data
 const pendingDocs = [
@@ -181,26 +232,26 @@ const pendingDocs = [
 
 // Risks data
 const risks = [
-    { 
-        id: 1, 
-        title: "Isolador fase B - Degradação 40%", 
-        project: "SE 230kV Norte", 
+    {
+        id: 1,
+        title: "Isolador fase B - Degradação 40%",
+        project: "SE 230kV Norte",
         severity: "high",
         description: "Risco de flashover - temperatura 87°C",
         deadline: "30/04/2026"
     },
-    { 
-        id: 2, 
-        title: "Disjuntor DJ-2 - Desgaste 60%", 
-        project: "Linha Transmissão 138kV", 
+    {
+        id: 2,
+        title: "Disjuntor DJ-2 - Desgaste 60%",
+        project: "Linha Transmissão 138kV",
         severity: "high",
         description: "Desgaste avançado nos contatos principais",
         deadline: "25/03/2026"
     },
-    { 
-        id: 3, 
-        title: "Temperatura acima do histórico", 
-        project: "SE 230kV Norte", 
+    {
+        id: 3,
+        title: "Temperatura acima do histórico",
+        project: "SE 230kV Norte",
         severity: "medium",
         description: "15% acima da média - necessita investigação",
         deadline: "15/03/2026"
@@ -339,7 +390,7 @@ document.getElementById('logout').addEventListener('click', () => {
 const renderDocuments = (docs = documents) => {
     const docList = document.getElementById('doc-list');
     docList.innerHTML = '';
-
+    
     if (docs.length === 0) {
         docList.innerHTML = `
             <div style="text-align: center; padding: 40px; color: var(--text-secondary);">
@@ -400,7 +451,7 @@ const setupFilters = () => {
     const searchInput = document.getElementById('search-input');
     const typeFilter = document.getElementById('type-filter');
     const sortFilter = document.getElementById('sort-filter');
-
+    
     const filterDocuments = () => {
         const searchTerm = searchInput.value.toLowerCase();
         const typeValue = typeFilter.value;
@@ -436,14 +487,65 @@ const setupFilters = () => {
     sortFilter.addEventListener('change', filterDocuments);
 };
 
-// ===== LOAD DOCUMENT =====
+// ===== LOAD DOCUMENT (COM DADOS DINÂMICOS) =====
 const loadDocument = (id) => {
     const doc = documents.find(d => d.id === id);
+    const data = documentData[id];
+    
     if (!doc) return;
-
+    
+    // Atualiza título e conteúdo principal
     document.getElementById('preview-title').textContent = doc.title;
     document.getElementById('preview-content').innerHTML = doc.content;
     document.getElementById('zoom-content').innerHTML = doc.content;
+    
+    // Atualiza resumo executivo dinâmico
+    const summaryList = document.getElementById('dynamic-summary');
+    if (summaryList && data) {
+        summaryList.innerHTML = data.summary.map(item => 
+            `<li>${item}</li>`
+        ).join('');
+    }
+    
+    // Atualiza dados extraídos
+    const dataCards = document.getElementById('dynamic-data');
+    if (dataCards && data) {
+        dataCards.innerHTML = data.extractedData.map(d => `
+            <div class="data-card">
+                <div class="data-icon">${d.icon}</div>
+                <div>
+                    <strong>${d.label}</strong>
+                    <p>${d.value}</p>
+                </div>
+            </div>
+        `).join('');
+    }
+    
+    // Atualiza classificação IA
+    const classList = document.getElementById('dynamic-classification');
+    if (classList && data) {
+        const typeClass = {
+            'risk': 'risk-item risk-high',
+            'warning': 'risk-item risk-medium',
+            'success': 'risk-item risk-low',
+            'opportunity': 'risk-item risk-low',
+            'info': 'risk-item risk-low'
+        };
+        
+        const icons = {
+            'risk': '⚠️',
+            'warning': '🟡',
+            'success': '✅',
+            'opportunity': '💡',
+            'info': 'ℹ️'
+        };
+        
+        classList.innerHTML = data.classification.map(c => `
+            <div class="${typeClass[c.type] || 'risk-item risk-low'}">
+                ${icons[c.type] || 'ℹ️'} ${c.text}
+            </div>
+        `).join('');
+    }
 };
 
 // ===== METRIC MODALS =====
@@ -452,7 +554,7 @@ const setupMetricModals = () => {
     const modalTitle = document.getElementById('modal-title');
     const modalBody = document.getElementById('modal-body');
     const closeModal = document.getElementById('close-modal');
-
+    
     const openModal = (title, content) => {
         modalTitle.textContent = title;
         modalBody.innerHTML = content;
@@ -607,7 +709,7 @@ const setupDocumentActions = () => {
         const modal = document.getElementById('zoom-modal');
         modal.classList.remove('hidden');
     });
-
+    
     document.getElementById('close-zoom').addEventListener('click', () => {
         document.getElementById('zoom-modal').classList.add('hidden');
     });
@@ -670,7 +772,7 @@ const setupActionForm = () => {
         document.getElementById('success-state').classList.remove('hidden');
         showToast('🎯 Ordem de serviço gerada!');
     });
-
+    
     document.getElementById('cancel-form').addEventListener('click', () => {
         showScreen('insights');
     });
@@ -686,7 +788,7 @@ document.addEventListener('DOMContentLoaded', () => {
     setupActionForm();
     setupMetricModals();
     updateNotificationBadge();
-
+    
     // Navigation - Logo
     document.getElementById('logo-link').addEventListener('click', (e) => {
         e.preventDefault();
@@ -702,30 +804,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('back-dashboard-upload').addEventListener('click', () => {
         showScreen('dashboard');
     });
-    
+
     document.getElementById('proceed-analysis').addEventListener('click', () => {
         showScreen('insights');
     });
-    
+
     // Navigation - Insights screen
     document.getElementById('create-action').addEventListener('click', () => {
         showScreen('action');
     });
-    
+
     document.getElementById('forward-team').addEventListener('click', () => {
         showToast('📤 Encaminhado para a equipe');
     });
-    
+
     document.getElementById('mark-reviewed').addEventListener('click', () => {
         showToast('✅ Marcado como analisado');
         setTimeout(() => showScreen('dashboard'), 1000);
     });
-    
+
     // Navigation - Action screen
-    document.getElementById('cancel-action').addEventListener('click', () => {
+    document.getElementById('cancel-action')?.addEventListener('click', () => {
         showScreen('insights');
     });
-    
+
     document.getElementById('back-dashboard-success').addEventListener('click', () => {
         showScreen('dashboard');
     });

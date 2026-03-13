@@ -4,24 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AutoU Docs | IA para Análise de Documentos</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <div class="header-left">
-            <a href="#" class="logo" id="logo-link">AutoU <span class="badge">Docs</span></a>
+            <a href="#" class="logo" id="logo-link">
+                <span>AutoU</span>
+                <span class="badge">Docs</span>
+            </a>
         </div>
-        <div class="nav">
+        <nav class="nav">
             <span class="user">Olá, Eng. Gabriel</span>
-            <button class="icon-btn" id="notifications-btn" title="Notificações">
+            <button class="icon-btn" id="notifications-btn">
                 🔔
                 <span class="badge-alert">3</span>
             </button>
-            <button class="avatar" id="profile-btn" title="Meu Perfil">G</button>
-        </div>
+            <button class="avatar" id="profile-btn">G</button>
+        </nav>
     </header>
 
     <!-- Notifications Dropdown -->
@@ -31,7 +34,7 @@
             <span class="badge-new">3 novas</span>
         </div>
         <div class="dropdown-content" id="notifications-list">
-            <!-- Notifications will be populated via JS -->
+            <!-- Renderizado via JS -->
         </div>
         <div class="dropdown-footer">
             <button class="btn-link" id="mark-all-read">Marcar todas como lidas</button>
@@ -83,37 +86,34 @@
         </div>
     </div>
 
-    <!-- Main Container -->
-    <main class="container">
-        <!-- DASHBOARD SCREEN -->
+    <div class="container">
+        <!-- Dashboard Screen -->
         <section id="dashboard" class="screen active">
             <div class="welcome">
                 <h1>Visão Geral</h1>
                 <p class="subtitle">Acompanhe seus documentos e análises em tempo real</p>
             </div>
 
-            <!-- Metrics -->
             <div class="metrics-grid">
-                <div class="metric-card warning clickable" id="metric-pending" data-metric="pending">
+                <div class="metric-card warning clickable" id="metric-pending">
                     <span class="metric-value">15</span>
                     <span class="metric-label">Docs pendentes</span>
                     <span class="metric-hint">Clique para ver detalhes →</span>
                 </div>
-                <div class="metric-card danger clickable" id="metric-risks" data-metric="risks">
+                <div class="metric-card danger clickable" id="metric-risks">
                     <span class="metric-value">3</span>
                     <span class="metric-label">Riscos detectados</span>
                     <span class="metric-hint">Clique para ver detalhes →</span>
                 </div>
-                <div class="metric-card success clickable" id="metric-time" data-metric="time">
+                <div class="metric-card success clickable" id="metric-time">
                     <span class="metric-value">4.2h</span>
                     <span class="metric-label">Tempo economizado/doc</span>
-                    <span class="metric-hint">Clique para ver comparação →</span>
+                    <span class="metric-hint">Clique para comparação →</span>
                 </div>
             </div>
 
-            <!-- Filters -->
             <div class="filters">
-                <input type="text" class="search-input" id="search-input" placeholder="Buscar por projeto, equipamento...">
+                <input type="text" class="search-input" id="search-input" placeholder="🔍 Buscar documentos...">
                 <select class="filter-select" id="type-filter">
                     <option value="all">Todos os tipos</option>
                     <option value="relatorio">Relatórios</option>
@@ -128,22 +128,24 @@
                 </select>
             </div>
 
-            <!-- Document List -->
             <div class="doc-list" id="doc-list">
-                <!-- Cards serão gerados via JS -->
+                <!-- Renderizado via JS -->
             </div>
         </section>
 
-        <!-- UPLOAD SCREEN -->
+        <!-- Upload Screen -->
         <section id="upload" class="screen">
+            <button class="btn-secondary btn-sm" onclick="showScreen('dashboard')" style="margin-bottom: 24px;">
+                ← Voltar ao Dashboard
+            </button>
+            
             <div class="upload-container">
-                <button class="btn-tertiary" id="back-dashboard-upload">← Voltar ao Dashboard</button>
                 <h2>Upload de Documentos</h2>
                 <p class="subtitle">Arraste e solte seus arquivos ou clique para navegar</p>
                 
                 <div class="dropzone" id="dropzone">
                     <div class="dropzone-icon">📁</div>
-                    <h3>Clique ou arraste arquivos aqui</h3>
+                    <p><strong>Clique ou arraste arquivos aqui</strong></p>
                     <p class="small">PDF, DOCX, PNG, JPG • Máx. 50MB cada</p>
                 </div>
 
@@ -171,140 +173,111 @@
             </div>
         </section>
 
-        <!-- INSIGHTS SCREEN -->
+        <!-- Insights Screen -->
         <section id="insights" class="screen">
+            <div class="insights-header">
+                <button onclick="showScreen('dashboard')" class="btn-secondary btn-sm back-btn">
+                    ← Voltar
+                </button>
+                <h2 id="insights-title">Análise do Documento</h2>
+            </div>
+
             <div class="insights-layout">
-                <!-- Document Preview -->
                 <div class="doc-preview">
                     <div class="preview-header">
-                        <h3 id="preview-title">Relatório de Inspeção Termográfica - SE 230kV Norte</h3>
+                        <h3 id="preview-title">Título do Documento</h3>
                         <div class="preview-controls">
                             <button class="btn-secondary btn-sm" id="zoom-btn">🔍 Zoom</button>
                             <button class="btn-secondary btn-sm" id="download-btn">📥 Baixar</button>
                         </div>
                     </div>
                     <div class="preview-content" id="preview-content">
-                        <!-- Content will be populated via JS -->
+                        <!-- Conteúdo dinâmico -->
                     </div>
                 </div>
 
-                <!-- AI Sidebar -->
-                <aside class="ai-sidebar">
+                <div class="ai-sidebar">
+                    <!-- Resumo Executivo Dinâmico -->
                     <div class="sidebar-section">
-                        <h4>🤖 Resumo Executivo</h4>
-                        <ul class="summary-list">
-                            <li>Inspeção identificou 3 pontos críticos de aquecimento</li>
-                            <li>Isoladores da fase B com degradação avançada</li>
-                            <li>Demais equipamentos operam dentro dos parâmetros</li>
+                        <h4>🤖 RESUMO EXECUTIVO</h4>
+                        <ul class="summary-list" id="dynamic-summary">
+                            <!-- Preenchido via JS -->
                         </ul>
                     </div>
 
+                    <!-- Dados Extraídos Dinâmicos -->
                     <div class="sidebar-section">
-                        <h4>📊 Dados Extraídos</h4>
-                        <div class="data-cards">
-                            <div class="data-card">
-                                <span class="data-icon">📍</span>
-                                <div>
-                                    <strong>Localização</strong>
-                                    <span>SE 230kV Norte, Bay TR-3</span>
-                                </div>
-                            </div>
-                            <div class="data-card">
-                                <span class="data-icon">🌡️</span>
-                                <div>
-                                    <strong>Temp. Máxima</strong>
-                                    <span>87°C (fase B)</span>
-                                </div>
-                            </div>
-                            <div class="data-card">
-                                <span class="data-icon">⚡</span>
-                                <div>
-                                    <strong>Tensão</strong>
-                                    <span>245 kV (alerta)</span>
-                                </div>
-                            </div>
-                            <div class="data-card">
-                                <span class="data-icon">📅</span>
-                                <div>
-                                    <strong>Próxima Ação</strong>
-                                    <span>30/04/2026</span>
-                                </div>
-                            </div>
+                        <h4>📊 DADOS EXTRAÍDOS</h4>
+                        <div class="data-cards" id="dynamic-data">
+                            <!-- Preenchido via JS -->
                         </div>
                     </div>
 
+                    <!-- Classificação IA Dinâmica -->
                     <div class="sidebar-section">
-                        <h4>🏷️ Classificação IA</h4>
-                        <div class="risk-list">
-                            <div class="risk-item risk-high">
-                                <span>⚠️</span>
-                                <span>Isolador fase B: degradação 40% - risco de flashover</span>
-                            </div>
-                            <div class="risk-item risk-medium">
-                                <span>🟡</span>
-                                <span>Temperatura 15% acima do histórico - investigar</span>
-                            </div>
-                            <div class="risk-item risk-low">
-                                <span>✅</span>
-                                <span>Certificações de segurança válidas</span>
-                            </div>
+                        <h4>🏷️ CLASSIFICAÇÃO IA</h4>
+                        <div class="risk-list" id="dynamic-classification">
+                            <!-- Preenchido via JS -->
                         </div>
                     </div>
 
                     <div class="sidebar-actions">
-                        <button class="btn-primary" id="create-action">Criar Plano de Ação</button>
-                        <button class="btn-secondary" id="forward-team">Encaminhar</button>
-                        <button class="btn-tertiary" id="mark-reviewed">Marcar como Analisado</button>
+                        <button class="btn-primary" id="create-action">+ Criar Plano de Ação</button>
+                        <button class="btn-secondary" id="forward-team">📤 Encaminhar</button>
+                        <button class="btn-tertiary" id="mark-reviewed">✅ Marcar como Analisado</button>
                     </div>
-                </aside>
+                </div>
             </div>
         </section>
 
-        <!-- ACTION SCREEN -->
+        <!-- Action Screen -->
         <section id="action" class="screen">
+            <button class="btn-secondary btn-sm" onclick="showScreen('insights')" style="margin-bottom: 24px;">
+                ← Voltar
+            </button>
+
             <div class="action-container">
-                <button class="btn-tertiary" id="cancel-action">← Voltar</button>
                 <h2>Criar Plano de Ação</h2>
                 <p class="subtitle">Preencha os detalhes para gerar a ordem de serviço</p>
 
                 <form class="action-form" id="action-form">
                     <div class="form-group">
                         <label>Problema Identificado</label>
-                        <textarea id="problem" readonly>Isolador da fase B com temperatura de 87°C - risco de flashover</textarea>
+                        <textarea id="action-problem" placeholder="Descreva o problema...">Isolador da fase B com temperatura de 87°C - risco de flashover</textarea>
                     </div>
 
                     <div class="form-group">
                         <label>Ação Recomendada (IA)</label>
-                        <textarea id="action-recommended" readonly>Substituir isolador da fase B do transformador TR-3 antes de 30/04/2026</textarea>
+                        <textarea id="action-recommendation" placeholder="Ação recomendada...">Substituir isolador da fase B do transformador TR-3 antes de 30/04/2026</textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Prioridade</label>
+                        <select id="action-priority">
+                            <option value="high">🔴 Alta</option>
+                            <option value="medium" selected>🟡 Média</option>
+                            <option value="low">🟢 Baixa</option>
+                        </select>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
-                            <label>Prioridade</label>
-                            <select id="priority">
-                                <option value="high">🔴 Alta</option>
-                                <option value="medium" selected>🟡 Média</option>
-                                <option value="low">🟢 Baixa</option>
+                            <label>Atribuir para</label>
+                            <select id="action-assignee">
+                                <option>Eng. Silva (Manutenção)</option>
+                                <option>Eng. Costa (Operações)</option>
+                                <option>Equipe Externa XYZ</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Atribuir para</label>
-                            <select id="assignee">
-                                <option value="silva">Eng. Silva (Manutenção)</option>
-                                <option value="costa" selected>Eng. Costa (Operações)</option>
-                                <option value="external">Equipe Externa XYZ</option>
-                            </select>
+                            <label>Prazo</label>
+                            <input type="date" id="action-deadline" value="2026-04-30">
                         </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Prazo</label>
-                        <input type="date" id="deadline" value="2026-04-30">
                     </div>
 
                     <div class="form-group">
                         <label>Observações</label>
-                        <textarea id="observations" placeholder="Adicione observações adicionais..."></textarea>
+                        <textarea id="action-observations" placeholder="Observações adicionais..."></textarea>
                     </div>
 
                     <div class="form-actions">
@@ -316,33 +289,22 @@
                 <div id="success-state" class="hidden">
                     <div class="success-icon">✅</div>
                     <h3>Plano de ação criado com sucesso!</h3>
-                    <p>Ordem de serviço #OS-2026-0342 enviada para Eng. Costa</p>
+                    <p class="small">Ordem de serviço #OS-2026-0342 enviada para Eng. Costa</p>
                     <p class="small">Prazo: 30/04/2026 • Prioridade: Média</p>
-                    <button class="btn-primary" id="back-dashboard-success">Voltar ao Dashboard</button>
+                    <button class="btn-primary" id="back-dashboard-success" style="margin-top: 24px;">
+                        Voltar ao Dashboard
+                    </button>
                 </div>
             </div>
         </section>
-    </main>
-
-    <!-- Floating Action Button -->
-    <button class="fab" id="fab-upload" title="Adicionar Documentos">+</button>
-
-    <!-- Toast Notification -->
-    <div class="toast hidden" id="toast">
-        <span id="toast-message">Mensagem aqui</span>
     </div>
 
-    <!-- Metric Detail Modal -->
-    <div class="modal hidden" id="metric-modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 id="modal-title">Detalhes</h3>
-                <button class="close-modal" id="close-modal">✕</button>
-            </div>
-            <div class="modal-body" id="modal-body">
-                <!-- Content will be populated via JS -->
-            </div>
-        </div>
+    <!-- FAB -->
+    <button class="fab" id="fab-upload">+</button>
+
+    <!-- Toast -->
+    <div class="toast hidden" id="toast">
+        <span id="toast-message"></span>
     </div>
 
     <!-- Zoom Modal -->
@@ -352,7 +314,22 @@
                 <h3>Visualização Ampliada</h3>
                 <button class="close-modal" id="close-zoom">✕</button>
             </div>
-            <div class="modal-body" id="zoom-content"></div>
+            <div class="modal-body" id="zoom-content">
+                <!-- Conteúdo dinâmico -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Metric Modal -->
+    <div class="modal hidden" id="metric-modal">
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3 id="modal-title">Detalhes</h3>
+                <button class="close-modal" id="close-modal">✕</button>
+            </div>
+            <div class="modal-body" id="modal-body">
+                <!-- Conteúdo dinâmico -->
+            </div>
         </div>
     </div>
 
