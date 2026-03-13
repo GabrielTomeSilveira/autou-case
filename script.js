@@ -626,7 +626,7 @@ const setupMetricModals = () => {
       const html = `
         <div class="metric-detail-list">
           <p style="margin-bottom: 16px; color: var(--text-secondary);">
-            <strong>15 documentos</strong> aguardando análise e atribuição
+            <strong>5 documentos</strong> aguardando análise e atribuição
           </p>
           ${pendingDocs.map(doc => `
             <div class="metric-detail-item pending">
