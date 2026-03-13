@@ -1,12 +1,10 @@
 # AutoU Docs - MVP para Análise de Documentos com IA
 
-![AutoU Docs](https://via.placeholder.com/1200x300?text=AutoU+Docs+-+IA+para+Documentos+Técnicos)
-
 **AutoU Docs** é uma proposta de produto digital que auxilia times de engenharia e infraestrutura a gerenciar, analisar e agir sobre um grande volume de documentos técnicos (laudos, relatórios, ARTs, propostas) com o apoio de Inteligência Artificial.
 
 Este repositório contém o código do protótipo navegável desenvolvido para o case prático do processo seletivo da AutoU.
 
-🔗 **Acesse o protótipo online:** [https://seudominio.github.io/autou-docs/](https://seudominio.github.io/autou-docs/)  
+🔗 **Acesse o protótipo online:** [https://gabrieltomesilveira.github.io/autou-case/](https://gabrieltomesilveira.github.io/autou-case/)  
 🎥 **Vídeo de apresentação:** [Link do YouTube/Loom]  
 📄 **Documento de proposta e raciocínio:** [Link para Notion/Google Docs]
 
@@ -78,15 +76,13 @@ O layout se adapta a:
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/GabrielTomeSilveira/autou-case
-   ``
-
-    Navegue até a pasta:
-    ``bash
-
+   git clone https://github.com/GabrielTomeSilveira/autou-case```
+  Navegue até a pasta:
+  
+   ```bash
     cd autou-docs
-```
-    Abra o arquivo index.html no navegador (pode usar uma extensão como Live Server para melhor experiência).
+   ```
+Abra o arquivo index.html no navegador (pode usar uma extensão como Live Server para melhor experiência).
 
 🛠️ Tecnologias utilizadas
 
