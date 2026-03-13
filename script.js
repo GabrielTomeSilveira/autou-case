@@ -637,7 +637,7 @@ const setupMetricModals = () => {
             </div>
           `).join('')}
           <p style="margin-top: 16px; font-size: 13px; color: var(--text-secondary);">
-            Mostrando 5 de 15 documentos pendentes
+            Mostrando 5 de 5 documentos pendentes
           </p>
         </div>
       `;
