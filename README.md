@@ -5,8 +5,8 @@
 Este repositório contém o código do protótipo navegável desenvolvido para o case prático do processo seletivo da AutoU.
 
 🔗 **Acesse o protótipo online:** [https://gabrieltomesilveira.github.io/autou-case/](https://gabrieltomesilveira.github.io/autou-case/)  
-🎥 **Vídeo de apresentação:** [Link do YouTube/Loom]  
-📄 **Documento de proposta e raciocínio:** [Link para Notion/Google Docs]
+🎥 **Vídeo de apresentação:** [https://youtu.be/7MMgPuN-vx4](https://youtu.be/7MMgPuN-vx4)  
+📄 **Documento de proposta e raciocínio:** [https://www.canva.com/design/DAHECgH-kiI/zCKL3PSQ48DNCeMyTpi3Vg/edit](https://www.canva.com/design/DAHECgH-kiI/zCKL3PSQ48DNCeMyTpi3Vg/edit)
 
 ---
 
